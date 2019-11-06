@@ -1,0 +1,27 @@
+<div class="card text-center">
+  <div class="card-header">
+    <ul class="nav nav-pills card-header-pills">
+      <li class="nav-item">
+        <a class="nav-link" href="/home/index">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/historical/index">Pulmonary Diseases </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/airquality/safety">How do I keep safe?</a>
+      </li>
+      <li class="nav-item">
+          <a ><%=link_to 'Log in', login_path %></a>
+        </li>
+        <li class="nav-item">
+          <a> <%=link_to 'Log out', logout_path %></a>
+        </li>
+        <li class="nav-item">
+          <a>hereeee <% if current_user != nil %> <%= current_user.name + current_user.Admin_rights.to_s %> <% end %></a>
+        </li>
+      <li class="nav-item ml-auto">
+        <%= image_tag("GlobeLogo.png", size: "150x90") %>
+      </li>
+    </ul>
+  </div>
+</div>

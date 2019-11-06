@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>YugiohStore</title>
+    <title>BreatheFree</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +10,8 @@
   </head>
 
   <body>
+    <%= render :partial=>"layouts/menu" %>
     <%= yield %>
+    <%= render "layouts/footer" %>
   </body>
 </html>
