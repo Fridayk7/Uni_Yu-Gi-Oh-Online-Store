@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  card_type: MyString
+  level: 1
+  race: MyString
+  card_attribute: MyString
+  atk: 1
+  def: 1
+
+two:
+  name: MyString
+  card_type: MyString
+  level: 1
+  race: MyString
+  card_attribute: MyString
+  atk: 1
+  def: 1

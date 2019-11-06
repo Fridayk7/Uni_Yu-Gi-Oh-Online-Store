@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @card.name %>
+</p>
+
+<p>
+  <strong>Card type:</strong>
+  <%= @card.card_type %>
+</p>
+
+<p>
+  <strong>Level:</strong>
+  <%= @card.level %>
+</p>
+
+<p>
+  <strong>Race:</strong>
+  <%= @card.race %>
+</p>
+
+<p>
+  <strong>Card attribute:</strong>
+  <%= @card.card_attribute %>
+</p>
+
+<p>
+  <strong>Atk:</strong>
+  <%= @card.atk %>
+</p>
+
+<p>
+  <strong>Def:</strong>
+  <%= @card.def %>
+</p>
+
+<%= link_to 'Edit', edit_card_path(@card) %> |
+<%= link_to 'Back', cards_path %>

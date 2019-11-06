@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :cards
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
