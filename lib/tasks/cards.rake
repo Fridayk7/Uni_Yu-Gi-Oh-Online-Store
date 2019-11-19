@@ -20,8 +20,6 @@ namespace :cards do
    end
  end
 
-
-
    task seed_sets: :environment do
     YugiohSet.destroy_all
 
@@ -37,19 +35,51 @@ namespace :cards do
     end
   end
 
-#  task seed_sets: :environment do
-#    CardPrices.destroy_all
+  task seed_mrd: :environment do
+    Stock.destroy_all
+  @sets = "Metal Raiders"
+  hash = YugiohApiService.new
 
-#hash = new.YugiohApiService
-#foreach set in Sets do
-#@set_holder = hash.get_cards_from_set(set.name)
-#while @set_holder["name"].exists do
-#     CardPrices.create!(
-#     name: @set_holder["name"].to_s,
-#     set: set.to_s,S
-#     atk:row[5].to_i,
-#     def:row[6].to_i
-#   )
-#   end
-#  end
+  @set_holder = hash.get_cards_from_set(@sets)
+  n=1
+  while @set_holder[n] != nil do
+    if Card.find_by(name: @set_holder[n]["name"])
+     Stock.create!(
+     card: Card.find_by(name: @set_holder[n]["name"]),
+     yugioh_set: YugiohSet.find_by(name: @sets),
+     print_tag: @set_holder[n]["numbers"][0]["print_tag"],
+     price: ( @set_holder[n]["numbers"][0]["price_data"]["data"]["prices"]["average"]  if (@set_holder[n]["numbers"][0]["price_data"]["status"] == "success") ) ,
+     quantity: rand(100),
+   )
+      end
+  puts  @set_holder[n]["name"] + "created"
+   n +=1
+    end
+  end
+
+
+
+  task seed_stock: :environment do
+    Stock.destroy_all
+@sets = YugiohSet.all
+hash = YugiohApiService.new
+
+@sets.each do |set|
+@set_holder = hash.get_cards_from_set(set.name)
+n=1
+while @set_holder[n] != nil do
+  if Card.find_by(name: @set_holder[n]["name"])
+   Stock.create!(
+   card: Card.find_by(name: @set_holder[n]["name"]),
+   yugioh_set: YugiohSet.find_by(name: set.name),
+   print_tag: @set_holder[n]["numbers"][0]["print_tag"],
+   price: ( @set_holder[n]["numbers"][0]["price_data"]["data"]["prices"]["average"]  if (@set_holder[n]["numbers"][0]["price_data"]["status"] == "success") ) ,
+   quantity: rand(100),
+ )
+      end
+      puts  @set_holder[n]["name"] + "created"
+       n +=1
+      end
+    end
+  end
 end

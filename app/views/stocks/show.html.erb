@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Card:</strong>
+  <%= @stock.card %>
+</p>
+
+<p>
+  <strong>Yugioh set:</strong>
+  <%= @stock.yugioh_set %>
+</p>
+
+<p>
+  <strong>Print tag:</strong>
+  <%= @stock.print_tag %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @stock.price %>
+</p>
+
+<p>
+  <strong>Quantity:</strong>
+  <%= @stock.quantity %>
+</p>
+
+<%= link_to 'Edit', edit_stock_path(@stock) %> |
+<%= link_to 'Back', stocks_path %>

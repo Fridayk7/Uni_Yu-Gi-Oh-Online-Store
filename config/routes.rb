@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :stocks
   resources :yugioh_sets
   resources :cards
   get '/login', to: 'sessions#new'
