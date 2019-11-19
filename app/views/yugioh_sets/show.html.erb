@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @yugioh_set.name %>
+</p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @yugioh_set.code %>
+</p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @yugioh_set.year %>
+</p>
+
+<%= link_to 'Edit', edit_yugioh_set_path(@yugioh_set) %> |
+<%= link_to 'Back', yugioh_sets_path %>

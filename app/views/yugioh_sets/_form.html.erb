@@ -1,0 +1,32 @@
+<%= form_with(model: yugioh_set, local: true) do |form| %>
+  <% if yugioh_set.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(yugioh_set.errors.count, "error") %> prohibited this yugioh_set from being saved:</h2>
+
+      <ul>
+      <% yugioh_set.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :code %>
+    <%= form.text_field :code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :year %>
+    <%= form.text_field :year %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
