@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_19_202014) do
+ActiveRecord::Schema.define(version: 2019_11_21_230403) do
 
   create_table "cards", force: :cascade do |t|
     t.string "name"
@@ -22,6 +22,27 @@ ActiveRecord::Schema.define(version: 2019_11_19_202014) do
     t.integer "def"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "credit_cards", force: :cascade do |t|
+    t.string "number"
+    t.string "exp_date"
+    t.string "name_on_card"
+    t.string "organisation"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_credit_cards_on_user_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "stock_id"
+    t.string "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["stock_id"], name: "index_orders_on_stock_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "stocks", force: :cascade do |t|

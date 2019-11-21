@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @orders = Order.all
   end
 
   # GET /users/new
@@ -26,7 +27,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-    if @user.email = "admin@admin.com"
+    if @user.email == "admin@admin.com"
       @user.Admin_rights = true
     end
     respond_to do |format|

@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :orders
+  resources :credit_cards
   resources :stocks
   resources :yugioh_sets
   resources :cards
