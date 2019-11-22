@@ -1,27 +1,56 @@
+
 <div class="card text-center">
   <div class="card-header">
-    <ul class="nav nav-pills card-header-pills">
-      <li class="nav-item">
-        <a class="nav-link" href="/home/index">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/cards">All cards </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/airquality/safety">How do I keep safe?</a>
-      </li>
-      <li class="nav-item">
-          <a ><%=link_to 'Log in', login_path %></a>
-        </li>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/home/index">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/cards">Card Information </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/stocks">Stock</a>
+          </li
+        </ul>
+    </div>
+    <div class="mx-auto order-0">
+      <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a> <%=link_to 'Log out', logout_path %></a>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" data-togg le="collapse" data-target=".dual-collapse2" >Search
+            </button>
+          </form>
         </li>
-        <li class="nav-item">
-          <a>hereeee <% if current_user != nil %> <%= current_user.name + current_user.Admin_rights.to_s %> <% end %></a>
-        </li>
-      <li class="nav-item ml-auto">
-        <%= image_tag("GlobeLogo.png", size: "150x90") %>
+
+      </ul>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+          <% if current_user == nil %>
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Login</a>
+          </li>
+          <% else %>
+          <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          My Account
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href='/users/<%=current_user.id%>' > <%=current_user.name%></a>
+          <a class="dropdown-item" href="/credit_cards">Set up a new credit card</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/logout">Logout</a>
+        </div>
       </li>
-    </ul>
-  </div>
+          <% end %>
+            <li class="nav-item">
+              <%= image_tag("GlobeLogo.png", size: "100x50") %>
+            </li>
+        </ul>
+    </div>
+</nav>
+</div>
 </div>
