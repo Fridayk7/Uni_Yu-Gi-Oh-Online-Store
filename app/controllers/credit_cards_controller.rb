@@ -1,3 +1,4 @@
+require 'bcrypt'
 class CreditCardsController < ApplicationController
   before_action :set_credit_card, only: [:show, :edit, :update, :destroy]
 
@@ -28,6 +29,8 @@ class CreditCardsController < ApplicationController
   def create
     @credit_card = CreditCard.new(credit_card_params)
   @credit_card.exp_date =params[:exp_date][:year].to_s + "/" +params[:exp_date][:month].to_s
+
+@credit_card.number = BCrypt::Password.create(@credit_card.number)
     respond_to do |format|
       if @credit_card.save
         format.html { redirect_to @credit_card, notice: 'Credit card was successfully created.' }
