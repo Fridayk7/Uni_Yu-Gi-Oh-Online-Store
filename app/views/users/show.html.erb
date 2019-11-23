@@ -10,22 +10,6 @@
   <%= @user.email %>
 </p>
 
-<p>
-  <strong>Password digest:</strong>
-  <%= @user.password_digest %>
-</p>
-
-<h4>My cart</h4>
-
-<% @orders.each do |ord| %>
- <% if ord.user_id == current_user.id %>
-<p>
-<%=ord.stock.card.name %><%=ord.stock.yugioh_set.name%><%=ord.stock.print_tag %><%=ord.quantity %> <%= "total price:" + (ord.stock.price.to_d* ord.quantity.to_i).to_s %>
-</p>
-<% end %>
-<% end %>
-
-
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

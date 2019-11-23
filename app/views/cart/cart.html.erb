@@ -1,0 +1,46 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= current_user.name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= current_user.email %>
+</p>
+
+
+<h4>My cart</h4>
+<table>
+  <thead>
+    <tr>
+      <th>Card Name</th>
+      <th>Yugioh Set</th>
+      <th>Print Tag</th>
+      <th>Quantity</th>
+      <th>Total Price</th>
+      <th> </th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @orders.each do |ord| %>
+     <% if ord.user_id == current_user.id %>
+     <% @user_orders.push(ord) %>
+     <%= @user_orders %>
+      <tr>
+        <td><%=ord.stock.card.name %></td>
+        <td><%=ord.stock.yugioh_set.name%></td>
+        <td><%=ord.stock.print_tag %></td>
+        <td><%=ord.quantity %></td>
+        <td><%= "total price:" + (ord.stock.price.to_d* ord.quantity.to_i).to_s %></td>
+        <td><td><%= link_to 'Remove Order', ord, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+      <% end %>
+  </tbody>
+
+</table>
+<p > <%= button_to 'Purchase now', cart_purchase_path, method: :post %></p>

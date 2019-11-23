@@ -16,17 +16,19 @@
 
   <tbody>
     <% @credit_cards.each do |credit_card| %>
+    <% if current_user.id == credit_card.user_id %>
       <tr>
         <td><%= credit_card.number %></td>
         <td><%= credit_card.exp_date %></td>
         <td><%= credit_card.name_on_card %></td>
         <td><%= credit_card.organisation %></td>
-        <td><%= credit_card.user %></td>
+        <td><%= credit_card.user.name %></td>
         <td><%= link_to 'Show', credit_card %></td>
         <td><%= link_to 'Edit', edit_credit_card_path(credit_card) %></td>
         <td><%= link_to 'Destroy', credit_card, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
+      <% end %>
   </tbody>
 </table>
 
