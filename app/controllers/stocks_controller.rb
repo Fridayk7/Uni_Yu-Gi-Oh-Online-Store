@@ -4,8 +4,10 @@ class StocksController < ApplicationController
   # GET /stocks
   # GET /stocks.json
   def index
-    @stocks = Stock.paginate(page: params[:page])
-
+    @card_id = Card.find_by(name: params[:term].to_s)
+    @stocks = Stock.search(params[:term],@card_id).paginate(page: params[:page])
+    #else
+    #  @stocks = Stock.paginate(page: params[:page])
   end
 
   # GET /stocks/1
@@ -75,6 +77,6 @@ class StocksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def stock_params
-      params.require(:stock).permit(:card_id, :yugioh_set_id, :print_tag, :price, :quantity)
+      params.require(:stock).permit(:card_id, :yugioh_set_id, :print_tag, :price, :quantity, :term)
     end
 end
