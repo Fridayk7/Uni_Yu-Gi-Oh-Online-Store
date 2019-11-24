@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
+  resources :payments
   get "/pages/:page" => "pages#show"
   get "/cart/:page" => "cart#show"
-post 'cart/purchase'
+#post 'cart/purchase'
+#post 'payments/purchase'
   resources :orders
   resources :credit_cards
   resources :stocks

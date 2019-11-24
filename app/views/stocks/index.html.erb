@@ -17,7 +17,6 @@
   <tbody>
     <% @stocks.each do |stock| %>
       <tr>
-        <td><%= stock.id%></td>
         <td><%= stock.card.name%></td>
         <td><%= stock.yugioh_set.name %></td>
         <td><%= stock.print_tag %></td>
@@ -32,5 +31,6 @@
 </table>
 
 <br>
+<%= will_paginate @stocks %>
 
 <%= link_to 'New Stock', new_stock_path %>

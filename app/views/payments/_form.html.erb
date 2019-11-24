@@ -1,0 +1,43 @@
+<%= form_with(model: payment, local: true) do |form| %>
+  <% if payment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(payment.errors.count, "error") %> prohibited this payment from being saved:</h2>
+
+      <ul>
+      <% payment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :amount %>
+    <%= form.hidden_field :amount,:value => @final_price %>
+    <%= @final_price %>
+  </div>
+<% @credit_cards = CreditCard.where(user_id: current_user.id) %>
+<% @user = current_user %>
+  <div class="field">
+    <%= form.label :credit_card_id %>
+    <%= form.collection_select(:credit_card_id, @credit_cards, :id, :organisation)%>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.hidden_field :user_id, :value => @user.id %>
+    <%= @user.name %>
+  </div>
+<% @current_user_orders.each do |ord| %>
+
+  <div class="field">
+    <%= form.hidden_field :order_id, :value => ord.id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+
+<% end %>
+
+<% end %>

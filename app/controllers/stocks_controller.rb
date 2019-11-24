@@ -4,12 +4,18 @@ class StocksController < ApplicationController
   # GET /stocks
   # GET /stocks.json
   def index
-    @stocks = Stock.all
+    @stocks = Stock.paginate(page: params[:page])
+
   end
 
   # GET /stocks/1
   # GET /stocks/1.json
   def show
+    hash = YugiohApiService.new
+    @stock = Stock.find(params[:id])
+    @newprice = hash.get_card_price(@stock.print_tag)
+    @stock.price = @newprice
+    @stock.save
   end
 
   # GET /stocks/new

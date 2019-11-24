@@ -29,7 +29,6 @@
     <% @orders.each do |ord| %>
      <% if ord.user_id == current_user.id %>
      <% @user_orders.push(ord) %>
-     <%= @user_orders %>
       <tr>
         <td><%=ord.stock.card.name %></td>
         <td><%=ord.stock.yugioh_set.name%></td>
@@ -43,4 +42,5 @@
   </tbody>
 
 </table>
-<p > <%= button_to 'Purchase now', cart_purchase_path, method: :post %></p>
+<p><%= link_to 'Make a payment', new_payment_path(:order_id=> @order) %>
+</p>
