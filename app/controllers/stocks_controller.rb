@@ -4,11 +4,17 @@ class StocksController < ApplicationController
   # GET /stocks
   # GET /stocks.json
   def index
+    @yugioh_sets = YugiohSet.all.paginate(page: params[:page])
     @card_id = Card.find_by(name: params[:term].to_s)
     @stocks = Stock.search(params[:term],@card_id).paginate(page: params[:page])
-    #else
-    #  @stocks = Stock.paginate(page: params[:page])
+    #@stocks = Stock.filter(params.slice(:print_tag, :price, :quantity)).paginate(page: params[:page])
+      filtering_params(params).each do |key, value|
+        @stocks = @stocks.public_send(key, value) if value.present?
+      end
+
   end
+
+
 
   # GET /stocks/1
   # GET /stocks/1.json
@@ -74,6 +80,11 @@ class StocksController < ApplicationController
     def set_stock
       @stock = Stock.find(params[:id])
     end
+
+    def filtering_params(params)
+  params.slice(:yugioh_set_id,:print_tag, :price, :quantity)
+end
+
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def stock_params
