@@ -4,7 +4,9 @@ class CardsController < ApplicationController
   # GET /cards
   # GET /cards.json
   def index
-    @cards = Card.all
+    @cards = Card.paginate(page: params[:page])
+    @card_types = Card.select(:card_type).distinct
+
   end
 
   # GET /cards/1

@@ -1,6 +1,64 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Cards</h1>
+<div id="container" style="width:100%; height:400px;"></div>
+  <script>
+    Highcharts.chart('container', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: 'Yugioh Card Types'
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+            }
+        }
+    },
+    series: [{
+        name: 'Main Card Types',
+        colorByPoint: true,
+        data: [{
+            name: 'Spell Cards',
+            y: <%= Card.where(card_type: 'Spell Card').count %>,
+            sliced: true,
+            selected: true
+        }, {
+            name: 'Trap Cards',
+            y: <%= Card.where(card_type: 'Trap Card').count %>
+        }, {
+            name: 'Effect Monsters',
+            y: <%= Card.where(card_type: 'Effect Monster').count %>
+        }, {
+            name: 'XYZ Monster',
+            y: <%= Card.where(card_type: 'XYZ Monster').count %>
+        }, {
+            name: 'Synchro Monster',
+            y: <%= Card.where(card_type: 'Synchro Monster').count %>
+        }, {
+            name: 'Pendulum Effect Monster',
+            y:  <%= Card.where(card_type: 'Pendulum Effect Monster').count %>
+        }, {
+            name: 'Fusion Monster',
+            y: <%= Card.where(card_type: 'Fusion Monster').count %>
+        }
+
+        ]
+    }]
+});
+
+</script>
 
 <table>
   <thead>
@@ -35,5 +93,5 @@
 </table>
 
 <br>
-
+<%= will_paginate @cards %>
 <%= link_to 'New Card', new_card_path %>
