@@ -4,7 +4,7 @@ class StocksController < ApplicationController
   # GET /stocks
   # GET /stocks.json
   def index
-    @yugioh_sets = YugiohSet.all.paginate(page: params[:page])
+    @yugioh_sets = YugiohSet.all
     @card_id = Card.find_by(name: params[:term].to_s)
     @stocks = Stock.search(params[:term],@card_id).paginate(page: params[:page])
     #@stocks = Stock.filter(params.slice(:print_tag, :price, :quantity)).paginate(page: params[:page])

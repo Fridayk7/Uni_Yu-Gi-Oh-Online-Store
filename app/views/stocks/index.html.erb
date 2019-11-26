@@ -1,18 +1,30 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Stocks</h1>
+<h1>Stock</h1>
 <div class="container">
   Filters
   <div class="row">
-    <div class="col-2">
-      Yugioh set
-      <% @yugioh_sets.each do |set| %>
-      <%= link_to "#{set.name}", request.params.merge(yugioh_set_id: "#{set.id}") %>
-      <% end %>
-      <%= will_paginate @yugioh_sets %>
+    <div class="col">
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Yugioh set
+        </button>
+        <div class="dropdown-menu pre-scrollable" aria-labelledby="dropdownMenuButton">
+          <% @yugioh_sets.each do |set| %>
+            <a class="dropdown-item">  <%= link_to "#{set.name}", request.params.merge(yugioh_set_id: "#{set.id}") %></a>
+          <% end %>
+        </div>
+      </div>
     </div>
-
-    <div class="col-10">
+    <div class="col">
+        Max Price
+      <%= form_tag(stocks_path, method: :get) do %>
+      <%= number_field_tag :price %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
       <table>
         <thead>
           <tr>
