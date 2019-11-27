@@ -27,7 +27,7 @@
 
   <tbody>
     <% @orders.each do |ord| %>
-     <% if ord.user_id == current_user.id %>
+     <% if ord.user_id == current_user.id && ord.payment == nil%>
      <% @user_orders.push(ord) %>
       <tr>
         <td><%=ord.stock.card.name %></td>

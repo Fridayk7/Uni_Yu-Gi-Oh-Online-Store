@@ -2,8 +2,8 @@
 
 <h1>Stock</h1>
 <div class="container">
-  Filters
-  <div class="row">
+  <div class="p-3 mb-2 bg-secondary row">
+  <h3>Filters</h3>
     <div class="col">
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="col">
-        Max Price
+      Max Price
       <%= form_tag(stocks_path, method: :get) do %>
       <%= number_field_tag :price %>
       <% end %>

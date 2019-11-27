@@ -11,6 +11,7 @@
     </div>
   <% end %>
 
+  <p> </p>
   <div class="field">
     <%= form.label :amount %>
     <%= form.hidden_field :amount,:value => @final_price %>
@@ -28,16 +29,8 @@
     <%= form.hidden_field :user_id, :value => @user.id %>
     <%= @user.name %>
   </div>
-<% @current_user_orders.each do |ord| %>
 
-  <div class="field">
-    <%= form.hidden_field :order_id, :value => ord.id %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-
-<% end %>
-
+<div class="actions">
+  <%= form.submit %>
+</div>
 <% end %>

@@ -5,6 +5,7 @@ class YugiohSetsController < ApplicationController
   # GET /yugioh_sets.json
   def index
     @yugioh_sets = YugiohSet.all
+    @years = "1999"
   end
 
   # GET /yugioh_sets/1

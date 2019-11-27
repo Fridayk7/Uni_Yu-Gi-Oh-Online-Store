@@ -5,8 +5,14 @@ class CardsController < ApplicationController
   # GET /cards.json
   def index
     @cards = Card.paginate(page: params[:page])
-    @card_types = Card.select(:card_type).distinct
-
+    @card_types = Card.all
+    @types = []
+    @card_types.each do |type|
+      @types.push(type.card_type)
+    end
+    @types = @types.uniq
+    puts @types[0]
+    @name = "1000"
   end
 
   # GET /cards/1

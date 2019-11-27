@@ -21,9 +21,11 @@ class PaymentsController < ApplicationController
     @user = current_user
     @final_price= 0
     @orders.each do |ord|
+      if ord.user_id == current_user.id && ord.payment == nil
       @current_user_orders.push(ord)
       @final_price += ord.quantity.to_d * ord.stock.price.to_d
     end
+  end
   end
 
   # GET /payments/1/edit
@@ -33,15 +35,23 @@ class PaymentsController < ApplicationController
   # POST /payments
   # POST /payments.json
   def create
+      @orders = Order.all
     @payment = Payment.new(payment_params)
     respond_to do |format|
       if @payment.save
-        @stock = @payment.order.stock
-        if @stock.purchases == nil
-          @stock.purchases = 0
+      #  @stock = @payment.order.stock
+      #  if @stock.purchases == nil
+      #    @stock.purchases = 0
+      #  end
+      #  @stock.purchases +=1
+      #  @stock.save
+      #end
+      @orders.each do |ord|
+        if ord.user_id == current_user.id
+          ord.payment_id = @payment.id
+          ord.save
         end
-        @stock.purchases +=1
-        @stock.save
+      end
         format.html { redirect_to @payment, notice: 'Payment was successfully created.' }
         format.json { render :show, status: :created, location: @payment }
       else
@@ -50,6 +60,7 @@ class PaymentsController < ApplicationController
       end
     end
   end
+
 
   # PATCH/PUT /payments/1
   # PATCH/PUT /payments/1.json
@@ -75,7 +86,9 @@ class PaymentsController < ApplicationController
     end
   end
 
-
+  def purchase
+    @payments = Payment.all
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -86,6 +99,6 @@ class PaymentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def payment_params
-      params.require(:payment).permit(:amount, :credit_card_id, :user_id, :order_id)
+      params.require(:payment).permit(:amount, :credit_card_id, :user_id, :payment_id)
     end
 end

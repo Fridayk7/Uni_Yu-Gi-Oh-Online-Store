@@ -8,16 +8,24 @@
       <th>User</th>
       <th>Stock</th>
       <th>Quantity</th>
+      <th>Payment</th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @orders.each do |order| %>
+
       <tr>
-        <td><%= order.user %></td>
-        <td><%= order.stock %></td>
+        <td><%= order.user.name %></td>
+        <td><%= order.stock.card.name %></td>
         <td><%= order.quantity %></td>
+      <% if order.payment != nil %>
+      <td><%= link_to 'See payment', (order.payment) %></td>
+      <% else %>
+      <td><%= "Unpaid" %></td>
+        <%end %>
+
         <td><%= link_to 'Show', order %></td>
         <td><%= link_to 'Edit', edit_order_path(order) %></td>
         <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
