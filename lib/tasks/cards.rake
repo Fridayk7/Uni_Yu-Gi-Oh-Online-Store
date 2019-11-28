@@ -2,7 +2,6 @@ require 'csv'
 namespace :cards do
   desc "TODO"
   task seed_cards: :environment do
-    Stock.destroy_all
     Card.destroy_all
 
    CSV.foreach("lib/assets/card_data.csv", :headers =>true) do |row |
