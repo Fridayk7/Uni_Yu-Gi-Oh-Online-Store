@@ -37,19 +37,20 @@ namespace :cards do
 
 
   task seed_stock: :environment do
-    Stock.destroy_all
 
     CSV.foreach("lib/assets/backupStocks.csv", :headers =>true) do |row |
       puts row.inspect #just so that we know the file's being read
 
       Stock.create!(
-      card: Card.find_by(id: row[0]),
-      yugioh_set: YugiohSet.find_by(id: row[1]),
+      card_id: row[0],
+      yugioh_set_id: row[1],
       print_tag: row[2],
       price: row[3],
       quantity: rand(100),
     )
   end
+end
+end
 
 #@sets = YugiohSet.all
 #hash = YugiohApiService.new
