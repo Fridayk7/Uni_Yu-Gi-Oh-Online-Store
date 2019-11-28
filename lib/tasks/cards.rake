@@ -35,51 +35,41 @@ namespace :cards do
     end
   end
 
-  task seed_mrd: :environment do
-    Stock.destroy_all
-  @sets = "Metal Raiders"
-  hash = YugiohApiService.new
-
-  @set_holder = hash.get_cards_from_set(@sets)
-  n=1
-  while @set_holder[n] != nil do
-    if Card.find_by(name: @set_holder[n]["name"])
-     Stock.create!(
-     card: Card.find_by(name: @set_holder[n]["name"]),
-     yugioh_set: YugiohSet.find_by(name: @sets),
-     print_tag: @set_holder[n]["numbers"][0]["print_tag"],
-     price: ( @set_holder[n]["numbers"][0]["price_data"]["data"]["prices"]["average"]  if (@set_holder[n]["numbers"][0]["price_data"]["status"] == "success") ) ,
-     quantity: rand(100),
-   )
-      end
-  puts  @set_holder[n]["name"] + "created"
-   n +=1
-    end
-  end
-
-
 
   task seed_stock: :environment do
     Stock.destroy_all
-@sets = YugiohSet.all
-hash = YugiohApiService.new
 
-@sets.each do |set|
-@set_holder = hash.get_cards_from_set(set.name)
-n=1
-while @set_holder[n] != nil do
-  if Card.find_by(name: @set_holder[n]["name"])
-   Stock.create!(
-   card: Card.find_by(name: @set_holder[n]["name"]),
-   yugioh_set: YugiohSet.find_by(name: set.name),
-   print_tag: @set_holder[n]["numbers"][0]["print_tag"],
-   price: ( @set_holder[n]["numbers"][0]["price_data"]["data"]["prices"]["average"]  if (@set_holder[n]["numbers"][0]["price_data"]["status"] == "success") ) ,
-   quantity: rand(100),
- )
-      end
-      puts  @set_holder[n]["name"] + "created"
-       n +=1
-      end
-    end
+    CSV.foreach("lib/assets/backupStocks.csv", :headers =>true) do |row |
+      puts row.inspect #just so that we know the file's being read
+
+      Stock.create!(
+      card: Card.find_by(id: row[0]),
+      yugioh_set: YugiohSet.find_by(id: row[1]),
+      print_tag: row[2],
+      price: row[3],
+      quantity: rand(100),
+    )
   end
+
+#@sets = YugiohSet.all
+#hash = YugiohApiService.new
+
+#@sets.each do |set|
+#@set_holder = hash.get_cards_from_set(set.name)
+#n=1
+#while @set_holder[n] != nil do
+#  if Card.find_by(name: @set_holder[n]["name"])
+#   Stock.create!(
+#   card: Card.find_by(name: @set_holder[n]["name"]),
+#   yugioh_set: YugiohSet.find_by(name: set.name),
+#   print_tag: @set_holder[n]["numbers"][0]["print_tag"],
+#   price: ( @set_holder[n]["numbers"][0]["price_data"]["data"]["prices"]["average"]  if (@set_holder[n]["numbers"][0]["price_data"]["status"] == "success") ) ,
+#   quantity: rand(100),
+ #)
+  #    end
+  #    puts  @set_holder[n]["name"] + "created"
+  #     n +=1
+  #    end
+  #  end
+  #end
 end
