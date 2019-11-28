@@ -52,6 +52,7 @@ namespace :cards do
 end
 end
 
+
 #@sets = YugiohSet.all
 #hash = YugiohApiService.new
 
@@ -73,4 +74,3 @@ end
   #    end
   #  end
   #end
-end
