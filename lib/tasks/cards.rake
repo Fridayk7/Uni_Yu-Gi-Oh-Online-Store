@@ -42,8 +42,8 @@ Stock.destroy_all
       puts row.inspect #just so that we know the file's being read
 
       Stock.create!(
-      card_id: row[0],
-      yugioh_set_id: row[1],
+      card: Card.find_by(name: row[0]),
+      yugioh_set: YugiohSet.find_by(name: row[1]),
       print_tag: row[2],
       price: row[3],
       quantity: rand(100),
