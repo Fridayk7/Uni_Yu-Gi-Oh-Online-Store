@@ -2,6 +2,7 @@ require 'csv'
 namespace :cards do
   desc "TODO"
   task seed_cards: :environment do
+    Stock.destroy_all
     Card.destroy_all
 
    CSV.foreach("lib/assets/card_data.csv", :headers =>true) do |row |
@@ -37,7 +38,7 @@ namespace :cards do
 
 
   task seed_stock: :environment do
-
+Stock.destroy_all
     CSV.foreach("lib/assets/backupStocks.csv", :headers =>true) do |row |
       puts row.inspect #just so that we know the file's being read
 
