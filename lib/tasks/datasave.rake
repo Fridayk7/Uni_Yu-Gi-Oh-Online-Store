@@ -7,9 +7,8 @@ namespace :datasave do
       line.puts "card, set, printTag, price, quantity"
 
       allCards.each do |item|
-        puts item.card_id.to_s + ',' + item.yugioh_set_id.to_s + ',' + item.print_tag.to_s + ',' + item.price.to_s + ',' + item.quantity.to_s
-        line.puts item.card.name.to_s + ',' + item.yugioh_set.name.to_s + ',' + item.print_tag.to_s + ',' + item.price.to_s + ',' + item.quantity.to_s
-
+        puts item.card.name.to_s + ',' + item.yugioh_set.name.to_s + ',' + item.print_tag.to_s + ',' + item.price.to_s + ',' + item.quantity.to_s
+        line.puts [ item.card.name.to_s, item.yugioh_set.name.to_s,item.print_tag.to_s, item.price.to_s, item.quantity.to_s].to_csv( row_sep: nil ).html_safe
       end
     end
 
