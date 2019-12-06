@@ -5,13 +5,19 @@
   <div class="p-3 mb-2 bg-secondary row">
   <h3>Filters</h3>
     <div class="col">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        My Account
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href='/users/<%=current_user.id%>' > <%=current_user.name%></a>
+        </div>
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Yugioh set
         </button>
         <div class="dropdown-menu pre-scrollable" aria-labelledby="dropdownMenuButton">
           <% @yugioh_sets.each do |set| %>
-            <a class="dropdown-item">  <%= link_to "#{set.name}", request.params.merge(yugioh_set_id: "#{set.id}") %></a>
+            <a class="dropdown-item">  <%= link_to "#{set.name}", request.params.merge(yugioh_set_id: "#{set.id}") %> </a>
           <% end %>
         </div>
       </div>

@@ -23,6 +23,7 @@ namespace :cards do
 
    task seed_sets: :environment do
     YugiohSet.destroy_all
+    Stock.destroy_all
 
     CSV.foreach("lib/assets/Yugioh_sets.csv", :headers =>true) do |row |
       puts row.inspect #just so that we know the file's being read
@@ -51,6 +52,17 @@ Stock.destroy_all
     )
   end
 end
+
+
+#task seed_stock: :environment do
+#Order.destroy_all
+
+#    Order.create!(
+#    user: Card.find_by(name: row[0]),
+#    stock: YugiohSet.find_by(name: row[1]),
+#    quantity: row[2],
+#  )
+#end
 end
 
 

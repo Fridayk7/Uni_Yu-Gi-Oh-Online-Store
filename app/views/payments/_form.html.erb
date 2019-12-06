@@ -30,6 +30,12 @@
     <%= @user.name %>
   </div>
 
+  <div class="field">
+    <%= form.label :pay_day %>
+    <%= form.hidden_field :pay_day, :value => Date.today.to_s %>
+    <%= Date.today.to_s %>
+  </div>
+
 <div class="actions">
   <%= form.submit %>
 </div>
