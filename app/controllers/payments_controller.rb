@@ -5,6 +5,18 @@ class PaymentsController < ApplicationController
   # GET /payments.json
   def index
     @payments = Payment.all
+   @dates = Payment.select(:pay_day).map(&:pay_day).uniq
+   puts @dates[0]
+   total = 0
+   @data = []
+   @dates.each do |date|
+     @amount = Payment.select(:amount).where(pay_day: date)
+     @amount.each do |amount|
+       total += amount.amount
+     end
+     @data.push(total)
+     total = 0
+   end
   end
 
   # GET /payments/1
@@ -38,18 +50,17 @@ class PaymentsController < ApplicationController
       @orders = Order.all
     @payment = Payment.new(payment_params)
     respond_to do |format|
-      if @payment.save
-      #  @stock = @payment.order.stock
-      #  if @stock.purchases == nil
-      #    @stock.purchases = 0
-      #  end
-      #  @stock.purchases +=1
-      #  @stock.save
-      #end
+      if @payment.save && current_user != nil
       @orders.each do |ord|
         if ord.user_id == current_user.id
           ord.payment_id = @payment.id
           ord.save
+          stock = ord.stock
+          if stock.purchases == nil
+            stock.purchases = 0
+          end
+          stock.purchases += ord.quantity.to_i
+          stock.save
         end
       end
         format.html { redirect_to @payment, notice: 'Payment was successfully created.' }

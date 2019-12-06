@@ -52,6 +52,21 @@
         }, {
             name: 'Fusion Monster',
             y: <%= Card.where(card_type: 'Fusion Monster').count %>
+        }, {
+            name: 'Normal Monster',
+            y: <%= Card.where(card_type: 'Normal Monster').count %>
+        }, {
+            name: 'Synchro Pendulum Effect Monster',
+            y: <%= Card.where(card_type: 'Synchro Pendulum Effect Monster').count %>
+        },{
+            name: 'Flip Effect Monster',
+            y: <%= Card.where(card_type: 'Flip Effect Monster').count %>
+        },{
+            name: 'Ritual Effect Monster',
+            y: <%= Card.where(card_type: 'Ritual Effect Monster').count %>
+        },{
+            name: 'Ritual Monster',
+            y: <%= Card.where(card_type: 'Ritual Monster').count %>
         }
 
         ]
