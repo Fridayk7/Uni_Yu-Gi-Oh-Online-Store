@@ -30,8 +30,8 @@ class CreditCardsController < ApplicationController
   def create
     @credit_card = CreditCard.new(credit_card_params)
   @credit_card.exp_date =params[:exp_date][:year].to_s + "/" +params[:exp_date][:month].to_s
-
-@credit_card.number = BCrypt::Password.create(@credit_card.number)
+last_four_digits = @credit_card.number[-4..-1]
+@credit_card.number = BCrypt::Password.create(@credit_card.number[0..-4]) + last_four_digits
     respond_to do |format|
       if @credit_card.save
         format.html { redirect_to @credit_card, notice: 'Credit card was successfully created.' }

@@ -17,11 +17,9 @@
     <%= form.hidden_field :amount,:value => @final_price %>
     <%= @final_price %>
   </div>
-<% @credit_cards = CreditCard.where(user_id: current_user.id) %>
-<% @user = current_user %>
   <div class="field">
     <%= form.label :credit_card_id %>
-    <%= form.collection_select(:credit_card_id, @credit_cards, :id, :organisation)%>
+    <%= form.collection_select(:credit_card_id, @credit_cards, :id, :last_four_digits)%>
   </div>
 
   <div class="field">

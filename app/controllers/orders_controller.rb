@@ -16,7 +16,7 @@ class OrdersController < ApplicationController
   def new
     @order = Order.new
     @users = User.all
-    @stock =Stock.find(params[:stock_id])
+    @stock = Stock.find(params[:stock_id])
   end
 
   # GET /orders/1/edit
@@ -27,9 +27,11 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = Order.new(order_params)
-
+    @stock = Stock.find_by(id: @order.stock)
     respond_to do |format|
-      if @order.save
+      if @order.quantity <= @stock.quantity && @order.save
+        @stock.quantity = @stock.quantity.to_i - @order.quantity.to_i
+        @stock.save
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
         format.json { render :show, status: :created, location: @order }
       else
@@ -56,6 +58,9 @@ class OrdersController < ApplicationController
   # DELETE /orders/1
   # DELETE /orders/1.json
   def destroy
+    stock = Stock.find_by(id: @order.stock)
+    stock.quantity = stock.quantity.to_i + @order.quantity.to_i
+    stock.save
     @order.destroy
     respond_to do |format|
       format.html { redirect_back(fallback_location: root_path) }

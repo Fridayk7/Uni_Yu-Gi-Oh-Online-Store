@@ -37,6 +37,7 @@ class PaymentsController < ApplicationController
       @current_user_orders.push(ord)
       @final_price += ord.quantity.to_d * ord.stock.price.to_d
     end
+
   end
   end
 
@@ -47,10 +48,10 @@ class PaymentsController < ApplicationController
   # POST /payments
   # POST /payments.json
   def create
-      @orders = Order.all
+    @orders = Order.all
     @payment = Payment.new(payment_params)
     respond_to do |format|
-      if @payment.save && current_user != nil
+      if current_user != nil && @payment.save 
       @orders.each do |ord|
         if ord.user_id == current_user.id
           ord.payment_id = @payment.id
