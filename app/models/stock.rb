@@ -7,7 +7,7 @@ class Stock < ApplicationRecord
   scope :yugioh_set_id, -> (yugioh_set_id) { where(yugioh_set_id: yugioh_set_id)}
   def self.search(term,card_id)
     if term && card_id
-      where('card_id LIKE ?',"#{card_id.id}")
+      where(card_id: card_id)
     else
     all
     end

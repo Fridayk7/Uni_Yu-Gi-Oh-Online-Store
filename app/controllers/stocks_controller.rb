@@ -6,9 +6,8 @@ class StocksController < ApplicationController
   # GET /stocks.json
   def index
     @yugioh_sets = YugiohSet.all
-    @card_id = Card.find_by(name: params[:term].to_s)
+    @card_id = Card.select(:id).where("name like ?","%#{params[:term].to_s}%")
     @stocks = Stock.search(params[:term],@card_id).paginate(page: params[:page])
-    #@stocks = Stock.filter(params.slice(:print_tag, :price, :quantity)).paginate(page: params[:page])
       filtering_params(params).each do |key, value|
         @stocks = @stocks.public_send(key, value) if value.present?
       end
