@@ -47,4 +47,19 @@ namespace :user do
   puts user.name + "done"
     end
   end
+
+  task seed_addresses: :environment do
+    Address.destroy_all
+@users = User.all
+
+@users.each do |user|
+  Address.create!(
+    street:Faker::Address.street_address,
+      city:Faker::Address.city,
+      postcode:Faker::Address.postcode,
+      user: user
+    )
+  puts user.name + "done"
+    end
+  end
 end

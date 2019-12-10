@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :addresses
   resources :payments
   get "/pages/:page" => "pages#show"
   get "/cart/:page" => "cart#show"

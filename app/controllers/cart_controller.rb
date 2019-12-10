@@ -1,18 +1,16 @@
 class CartController < ApplicationController
   def show
-    #<p > <%= button_to 'Purchase now', cart_purchase_path, method: :post %></p>
+
     @user_orders = []
     @orders= Order.all
-    render template: "cart/#{params[:page]}"
-    end
-
-  def purchase
-    @orders= Order.all
+    hash = YugiohApiService.new
     @orders.each do |ord|
-     if ord.user_id == current_user.id
-       ord.destroy
-     end
+      if ord.user_id == current_user.id && ord.payment == nil
+        ord.stock.price = hash.get_card_price(ord.stock.print_tag)
+        ord.save
+        @user_orders.push(ord)
+      end
     end
-    redirect_back(fallback_location: root_path)
+        render template: "cart/#{params[:page]}"
   end
 end

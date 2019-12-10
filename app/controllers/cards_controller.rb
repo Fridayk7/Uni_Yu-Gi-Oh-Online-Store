@@ -1,5 +1,6 @@
 class CardsController < ApplicationController
   before_action :set_card, only: [:show, :edit, :update, :destroy]
+  skip_before_action :logged_in?, only:[:index]
 
   # GET /cards
   # GET /cards.json

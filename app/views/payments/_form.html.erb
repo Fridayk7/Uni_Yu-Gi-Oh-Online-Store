@@ -21,7 +21,10 @@
     <%= form.label :credit_card_id %>
     <%= form.collection_select(:credit_card_id, @credit_cards, :id, :last_four_digits)%>
   </div>
-
+  <div class="field">
+    <%= form.label :address_id %>
+    <%= form.collection_select(:address_id, @addresses, :id, :street)%>
+  </div>
   <div class="field">
     <%= form.label :user_id %>
     <%= form.hidden_field :user_id, :value => @user.id %>

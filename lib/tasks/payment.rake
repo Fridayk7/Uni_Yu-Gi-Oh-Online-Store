@@ -16,7 +16,8 @@ Payment.destroy_all
           amount: amount,
           credit_card: CreditCard.where(user: user).first,
           user: user,
-          pay_day: Faker::Date.between(from: 10.days.ago, to: Date.today)
+          pay_day: Faker::Date.between(from: 10.days.ago, to: Date.today),
+          address: Address.where(user:user).first
           )
         order.payment = payment
         order.save

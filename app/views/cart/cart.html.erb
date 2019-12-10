@@ -26,9 +26,7 @@
   </thead>
 
   <tbody>
-    <% @orders.each do |ord| %>
-     <% if ord.user_id == current_user.id && ord.payment == nil%>
-     <% @user_orders.push(ord) %>
+    <% @user_orders.each do |ord| %>
       <tr>
         <td><%=ord.stock.card.name %></td>
         <td><%=ord.stock.yugioh_set.name%></td>
@@ -38,9 +36,12 @@
         <td><td><%= link_to 'Remove Order', ord, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
-      <% end %>
   </tbody>
 
 </table>
+<% if @user_orders != [] %>
 <p><%= link_to 'Make a payment', new_payment_path(:order_id=> @order) %>
 </p>
+<%else%>
+<p><%= link_to "Let's go order something", stocks_path() %>
+<% end %>

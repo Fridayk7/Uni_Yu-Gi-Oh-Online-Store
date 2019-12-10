@@ -15,6 +15,11 @@
   <%= @payment.user.name %>
 </p>
 
+<p>
+  <strong>Address:</strong>
+  <%= @payment.address.street %>
+</p>
+
 
 
 <%= link_to 'Edit', edit_payment_path(@payment) %> |
