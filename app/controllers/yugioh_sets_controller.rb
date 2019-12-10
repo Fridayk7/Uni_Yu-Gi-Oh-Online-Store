@@ -7,7 +7,13 @@ class YugiohSetsController < ApplicationController
   # GET /yugioh_sets.json
   def index
     @yugioh_sets = YugiohSet.all
-    @years = "1999"
+    @years = YugiohSet.select(:year).map(&:year).uniq
+    @years = @years.sort
+    @data = []
+    @years.each do |year|
+      count = YugiohSet.where("year = ?", "#{year}").count
+      @data.push(count)
+    end
   end
 
   # GET /yugioh_sets/1
