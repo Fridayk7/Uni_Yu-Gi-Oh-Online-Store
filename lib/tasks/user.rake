@@ -16,6 +16,7 @@ namespace :user do
       email: "admin@admin.com" ,
       password: adminpassword.to_s,
       password_confirmation: adminpassword.to_s
+      Admin_rights: true
     )
     puts "Rest of the users"
     20.times do |index|

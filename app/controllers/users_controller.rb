@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @orders = Order.all
-    if current_user.Admin_rights != true
+    if current_user != nil && current_user.Admin_rights != true
       @user = params[:id]
       @user = User.find_by(id: @user)
       unless session[:user_id] == @user.id
