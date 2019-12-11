@@ -94,6 +94,7 @@ class PaymentsController < ApplicationController
   # DELETE /payments/1
   # DELETE /payments/1.json
   def destroy
+      MyLog.debug "Payment #{@payment.id}destroyed by user name #{current_user.name} with email #{current_user.email}"
     @payment.destroy
     respond_to do |format|
       format.html { redirect_to payments_url, notice: 'Payment was successfully destroyed.' }

@@ -42,6 +42,7 @@ class StocksController < ApplicationController
 
     respond_to do |format|
       if @stock.save
+          MyLog.debug "Stock #{@stock.id}created by user name #{@card.user.name} with email #{@card.user.name}"
         format.html { redirect_to @stock, notice: 'Stock was successfully created.' }
         format.json { render :show, status: :created, location: @stock }
       else
@@ -68,7 +69,9 @@ class StocksController < ApplicationController
   # DELETE /stocks/1
   # DELETE /stocks/1.json
   def destroy
+      MyLog.debug "Stock #{@stock.id} destroyed by user name #{@card.user.name} with email #{@card.user.name}"
     @stock.destroy
+
     respond_to do |format|
       format.html { redirect_to stocks_url, notice: 'Stock was successfully destroyed.' }
       format.json { head :no_content }

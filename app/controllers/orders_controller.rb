@@ -61,6 +61,9 @@ class OrdersController < ApplicationController
     stock = Stock.find_by(id: @order.stock)
     stock.quantity = stock.quantity.to_i + @order.quantity.to_i
     stock.save
+    if current_user.Admin_rights == true
+      MyLog.debug "Order #{@Order.id}destroyed by user name #{current_user.name} with email #{current_user.email}"
+    end
     @order.destroy
     respond_to do |format|
       format.html { redirect_back(fallback_location: root_path) }

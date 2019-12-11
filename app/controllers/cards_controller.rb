@@ -34,7 +34,9 @@ class CardsController < ApplicationController
   # POST /cards.json
   def create
     @card = Card.new(card_params)
-
+    if current_user != nil
+      MyLog.debug "Card #{@card.id}created by user name #{current_user.name} with email #{current_user.email}"
+    end
     respond_to do |format|
       if @card.save
         format.html { redirect_to @card, notice: 'Card was successfully created.' }
@@ -64,6 +66,7 @@ class CardsController < ApplicationController
   # DELETE /cards/1.json
   def destroy
     @card.destroy
+      MyLog.debug "Card #{@card.id}destroyed by user name #{current_user.name} with email #{current_user.email}"
     respond_to do |format|
       format.html { redirect_to cards_url, notice: 'Card was successfully destroyed.' }
       format.json { head :no_content }

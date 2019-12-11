@@ -34,9 +34,11 @@ class YugiohSetsController < ApplicationController
   # POST /yugioh_sets.json
   def create
     @yugioh_set = YugiohSet.new(yugioh_set_params)
-
     respond_to do |format|
       if @yugioh_set.save
+        if current_user != nil
+          MyLog.debug "YugiohSet #{@yugioh_set.id}created by user name #{current_user.name} with email #{current_user.email}"
+        end
         format.html { redirect_to @yugioh_set, notice: 'Yugioh set was successfully created.' }
         format.json { render :show, status: :created, location: @yugioh_set }
       else
@@ -51,6 +53,7 @@ class YugiohSetsController < ApplicationController
   def update
     respond_to do |format|
       if @yugioh_set.update(yugioh_set_params)
+        MyLog.debug "YugiohSet #{@yugioh_set.id}updated by user name #{current_user.name} with email #{current_user.email}"
         format.html { redirect_to @yugioh_set, notice: 'Yugioh set was successfully updated.' }
         format.json { render :show, status: :ok, location: @yugioh_set }
       else
@@ -63,6 +66,7 @@ class YugiohSetsController < ApplicationController
   # DELETE /yugioh_sets/1
   # DELETE /yugioh_sets/1.json
   def destroy
+    MyLog.debug "YugiohSet #{@yugioh_set.id}destroyed by user name #{current_user.name} with email #{current_user.email}"
     @yugioh_set.destroy
     respond_to do |format|
       format.html { redirect_to yugioh_sets_url, notice: 'Yugioh set was successfully destroyed.' }
