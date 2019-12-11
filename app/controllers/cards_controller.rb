@@ -13,8 +13,6 @@ class CardsController < ApplicationController
       @types.push(type.card_type)
     end
     @types = @types.uniq
-    puts @types[0]
-    @name = "1000"
   end
 
   # GET /cards/1

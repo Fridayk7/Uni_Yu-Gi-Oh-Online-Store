@@ -1,5 +1,6 @@
 class CreditCard < ApplicationRecord
   belongs_to :user
+  has_many :payments, dependent: :destroy
   validates :exp_date, :number, :name_on_card,:organisation, presence: true
 enum organisation: {
     "American Express" => "AmericanExpress",

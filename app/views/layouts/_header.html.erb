@@ -47,6 +47,10 @@
           <a class="dropdown-item" href="/credit_cards/new">Set up a new credit card</a>
             <a class="dropdown-item" href="/addresses/new">Set up a new address </a>
           <div class="dropdown-divider"></div>
+          <% if current_user.Admin_rights == true %>
+            <a class="dropdown-item" href="/orders">All Orders</a>
+            <a class="dropdown-item" href="/payments">All Payments and Statistics</a>
+          <%end%>
           <a class="dropdown-item" href="/logout">Logout</a>
         </div>
       </li>

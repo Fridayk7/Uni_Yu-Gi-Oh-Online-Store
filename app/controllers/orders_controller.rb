@@ -1,11 +1,19 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :admin?, only: [:index]
   # GET /orders
   # GET /orders.json
   def index
     @orders = Order.all
     if current_user.Admin_rights != true
       @orders = Order.where("user_id = ?","#{current_user.id}")
+    end
+    @ordering_users = Order.select(:user_id).map(&:user_id).uniq
+    @top_data = []
+    @users = []
+    @ordering_users.each do |user|
+      @users.push(User.find_by(id:user))
+      @top_data.push(Order.where("user_id = ?","#{user}").count)
     end
   end
 
@@ -37,7 +45,7 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     @stock = Stock.find_by(id: @order.stock)
     respond_to do |format|
-      if @order.quantity <= @stock.quantity && @order.save
+      if @order.quantity.to_i <= @stock.quantity.to_i && @order.save
         @stock.quantity = @stock.quantity.to_i - @order.quantity.to_i
         @stock.save
         format.html { redirect_to @order, notice: 'Order was successfully created.' }

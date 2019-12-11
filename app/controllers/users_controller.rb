@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   skip_before_action :logged_in?, only:[:new, :create, :show]
+  before_action :admin?, only:[:index]
 
   # GET /users
   # GET /users.json
@@ -12,7 +13,14 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @orders = Order.all
-
+    if current_user.Admin_rights != true
+      @user = params[:id]
+      @user = User.find_by(id: @user)
+      unless session[:user_id] == @user.id
+        redirect_to "/pages/denied"
+        return
+      end
+    end
   end
 
   # GET /users/new

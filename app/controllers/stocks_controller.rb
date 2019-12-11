@@ -1,7 +1,7 @@
 class StocksController < ApplicationController
   before_action :set_stock, only: [:show, :edit, :update, :destroy]
   skip_before_action :logged_in?, only:[:index,:show]
-  before_action :admin?, only:[:edit,:update,:destroy]
+  before_action :admin?, only:[:edit,:update,:destroy,:new]
 
   # GET /stocks
   # GET /stocks.json
@@ -30,6 +30,8 @@ class StocksController < ApplicationController
   # GET /stocks/new
   def new
     @stock = Stock.new
+    @cards = Card.all
+    @yugioh_sets = YugiohSet.all
   end
 
   # GET /stocks/1/edit

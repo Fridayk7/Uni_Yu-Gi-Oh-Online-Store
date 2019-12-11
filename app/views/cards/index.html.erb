@@ -29,45 +29,13 @@
     series: [{
         name: 'Main Card Types',
         colorByPoint: true,
-        data: [{
-            name: 'Spell Cards',
-            y: <%= Card.where(card_type: 'Spell Card').count %>,
-            sliced: true,
-            selected: true
-        }, {
-            name: 'Trap Cards',
-            y: <%= Card.where(card_type: 'Trap Card').count %>
-        }, {
-            name: 'Effect Monsters',
-            y: <%= Card.where(card_type: 'Effect Monster').count %>
-        }, {
-            name: 'XYZ Monster',
-            y: <%= Card.where(card_type: 'XYZ Monster').count %>
-        }, {
-            name: 'Synchro Monster',
-            y: <%= Card.where(card_type: 'Synchro Monster').count %>
-        }, {
-            name: 'Pendulum Effect Monster',
-            y:  <%= Card.where(card_type: 'Pendulum Effect Monster').count %>
-        }, {
-            name: 'Fusion Monster',
-            y: <%= Card.where(card_type: 'Fusion Monster').count %>
-        }, {
-            name: 'Normal Monster',
-            y: <%= Card.where(card_type: 'Normal Monster').count %>
-        }, {
-            name: 'Synchro Pendulum Effect Monster',
-            y: <%= Card.where(card_type: 'Synchro Pendulum Effect Monster').count %>
-        },{
-            name: 'Flip Effect Monster',
-            y: <%= Card.where(card_type: 'Flip Effect Monster').count %>
-        },{
-            name: 'Ritual Effect Monster',
-            y: <%= Card.where(card_type: 'Ritual Effect Monster').count %>
-        },{
-            name: 'Ritual Monster',
-            y: <%= Card.where(card_type: 'Ritual Monster').count %>
-        }
+        data: [
+        <% @types.each do |type| %>
+        {
+            name: "<%="#{type}"%>",
+            y: <%= Card.where(card_type: "#{type}").count %>
+        },
+        <%end%>
 
         ]
     }]

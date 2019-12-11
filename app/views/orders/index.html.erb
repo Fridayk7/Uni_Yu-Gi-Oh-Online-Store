@@ -1,7 +1,53 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Orders</h1>
+<div id="container" style="width:100%; height:400px;"></div>
+<script>
+Highcharts.chart('container', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'User Orders'
+    },
+    subtitle: {
+        text: 'According to orders'
+    },
+    xAxis: {
+        categories: [
+        <% @users.each do |user|%>
+            "<%= "#{user.name}" %>",
+          <%end%>
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Orders'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [{
+        name: 'Orders',
+        data: <%= @top_data %>
 
+    }]
+});
+</script>
 <table>
   <thead>
     <tr>
@@ -27,13 +73,13 @@
         <%end %>
 
         <td><%= link_to 'Show', order %></td>
+        <% if current_user.Admin_rights != true %>
         <td><%= link_to 'Edit', edit_order_path(order) %></td>
         <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Order', new_order_path %>
