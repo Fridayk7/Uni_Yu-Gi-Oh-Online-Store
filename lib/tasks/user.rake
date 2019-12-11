@@ -15,7 +15,7 @@ namespace :user do
       name: "Admin",
       email: "admin@admin.com" ,
       password: adminpassword.to_s,
-      password_confirmation: adminpassword.to_s
+      password_confirmation: adminpassword.to_s,
       Admin_rights: true
     )
     puts "Rest of the users"
@@ -28,7 +28,6 @@ namespace :user do
             email: myname + "@gmail.com" ,
             password: mypassword.to_s,
             password_confirmation: mypassword.to_s,
-            #password_digest: BCrypt::Password.create(mypassword)
           )
         end
   end
