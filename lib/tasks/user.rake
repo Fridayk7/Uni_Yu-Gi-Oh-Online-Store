@@ -9,11 +9,11 @@ namespace :user do
 
     adminpassword = Faker::Number.number(digits: 10)
     puts "Please write these cretentials down since you will need them later"
-    puts "Emai: Admin@gmail.com"
+    puts "Emai: admin@admin.com"
     puts "Password: " + adminpassword.to_s
     User.create!(
       name: "Admin",
-      email: "Admin" + "@gmail.com" ,
+      email: "admin@admin.com" ,
       password: adminpassword.to_s,
       password_confirmation: adminpassword.to_s
     )

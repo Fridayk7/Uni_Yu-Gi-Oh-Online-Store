@@ -40,14 +40,16 @@ namespace :cards do
 Stock.destroy_all
     CSV.foreach("lib/assets/backupStocks.csv", :headers =>true) do |row |
       puts row.inspect #just so that we know the file's being read
-
-      Stock.create!(
-      card: Card.find_by(name: row[0]),
-      yugioh_set: YugiohSet.find_by(name: row[1]),
-      print_tag: row[2],
-      price: row[3],
-      quantity: rand(100),
-    )
+      card = Card.where(name: row[0])
+      if row[3].to_i != 0 && card != []
+        Stock.create!(
+        card: Card.find_by(name: row[0]),
+        yugioh_set: YugiohSet.find_by(name: row[1]),
+        print_tag: row[2],
+        price: row[3],
+        quantity: rand(100),
+        )
+      end
   end
 end
 end

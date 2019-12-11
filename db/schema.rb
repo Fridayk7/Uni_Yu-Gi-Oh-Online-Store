@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_10_212130) do
+ActiveRecord::Schema.define(version: 2019_12_11_005021) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "street"
@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 2019_12_10_212130) do
     t.integer "card_id"
     t.integer "yugioh_set_id"
     t.string "print_tag"
-    t.string "price"
+    t.float "price"
     t.string "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

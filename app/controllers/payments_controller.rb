@@ -6,6 +6,7 @@ class PaymentsController < ApplicationController
   def index
     @payments = Payment.all
    @dates = Payment.select(:pay_day).map(&:pay_day).uniq
+   puts @dates
    @dates = @dates.sort
    puts @dates[0]
    total = 0
@@ -113,6 +114,6 @@ class PaymentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def payment_params
-      params.require(:payment).permit(:amount, :credit_card_id, :user_id, :payment_id, :address_id)
+      params.require(:payment).permit(:amount, :credit_card_id, :user_id, :payment_id, :address_id, :pay_day)
     end
 end
