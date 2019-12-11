@@ -5,7 +5,7 @@ class PaymentsController < ApplicationController
   # GET /payments
   # GET /payments.json
   def index
-    @payments = Payment.all
+    @payments = Payment.all.paginate(page: params[:page])
    @dates = Payment.select(:pay_day).map(&:pay_day).uniq
    puts @dates
    @dates = @dates.sort

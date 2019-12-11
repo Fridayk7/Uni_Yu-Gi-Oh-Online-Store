@@ -46,7 +46,7 @@
               <td><%= stock.price %></td>
               <td><%= stock.quantity %></td>
               <td><%= link_to 'Show', stock %></td>
-              <% if current_user.Admin_rights != true %>
+            <% if current_user != nil && current_user.Admin_rights != true %>
                 <td><%= link_to 'Edit', edit_stock_path(stock) %></td>
                 <td><%= link_to 'Destroy', stock, method: :delete, data: { confirm: 'Are you sure?' } %></td>
               <%end%>
@@ -57,7 +57,7 @@
 
       <br>
       <%= will_paginate @stocks %>
-      <% if current_user.Admin_rights != true %>
+      <% if current_user != nil && current_user.Admin_rights != true %>
         <%= link_to 'New Stock', new_stock_path %>
       <%end%>
     </div>

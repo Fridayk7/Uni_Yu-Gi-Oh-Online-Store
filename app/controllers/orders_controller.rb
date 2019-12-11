@@ -4,9 +4,9 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.all
+    @orders = Order.all.paginate(page: params[:page])
     if current_user.Admin_rights != true
-      @orders = Order.where("user_id = ?","#{current_user.id}")
+      @orders = Order.where("user_id = ?","#{current_user.id}").paginate(page: params[:page])
     end
     @ordering_users = Order.select(:user_id).map(&:user_id).uniq
     @top_data = []
