@@ -1,18 +1,27 @@
 require 'bcrypt'
 class CreditCardsController < ApplicationController
-
   before_action :set_credit_card, only: [:show, :edit, :update, :destroy]
+
 
   # GET /credit_cards
   # GET /credit_cards.json
   def index
     @credit_cards = CreditCard.all
+    if current_user.Admin_rights != true
+      @credit_cards = CreditCard.where("user_id = ?", "#{current_user.id}")
+    end
     @users = User.all
   end
 
   # GET /credit_cards/1
   # GET /credit_cards/1.json
   def show
+    @card = params[:id]
+    @card = CreditCard.find_by(id: @card)
+    unless session[:user_id] == @card.user_id
+      redirect_to "/pages/denied"
+      return
+    end
   end
 
   # GET /credit_cards/new

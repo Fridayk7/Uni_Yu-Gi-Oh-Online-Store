@@ -1,5 +1,6 @@
 class PaymentsController < ApplicationController
   before_action :set_payment, only: [:show, :edit, :update, :destroy]
+  before_action :admin?, only:[:index,:edit,:update,:destroy]
 
   # GET /payments
   # GET /payments.json
@@ -24,6 +25,12 @@ class PaymentsController < ApplicationController
   # GET /payments/1
   # GET /payments/1.json
   def show
+    @payment = params[:id]
+    @payment = Payment.find_by(id: @payment)
+    unless session[:user_id] == @payment.user_id
+      redirect_to "/pages/denied"
+      return
+    end
   end
 
   # GET /payments/new

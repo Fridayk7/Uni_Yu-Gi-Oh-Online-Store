@@ -1,6 +1,7 @@
 class StocksController < ApplicationController
   before_action :set_stock, only: [:show, :edit, :update, :destroy]
   skip_before_action :logged_in?, only:[:index,:show]
+  before_action :admin?, only:[:edit,:update,:destroy]
 
   # GET /stocks
   # GET /stocks.json

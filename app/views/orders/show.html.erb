@@ -2,12 +2,12 @@
 
 <p>
   <strong>User:</strong>
-  <%= @order.user %>
+  <%= @order.user.name %>
 </p>
 
 <p>
   <strong>Stock:</strong>
-  <%= @order.stock %>
+  <%= @order.stock.card.name %>
 </p>
 
 <p>
@@ -16,4 +16,4 @@
 </p>
 
 <%= link_to 'Edit', edit_order_path(@order) %> |
-<%= link_to 'Back', orders_path %>
+<%= link_to 'Back', stocks_path %>

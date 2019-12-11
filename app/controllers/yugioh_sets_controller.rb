@@ -1,6 +1,7 @@
 class YugiohSetsController < ApplicationController
   before_action :set_yugioh_set, only: [:show, :edit, :update, :destroy]
   skip_before_action :logged_in?, only:[:index]
+  before_action :admin?, only:[:edit,:update,:destroy]
 
 
   # GET /yugioh_sets

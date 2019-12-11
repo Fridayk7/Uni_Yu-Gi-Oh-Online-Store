@@ -5,7 +5,7 @@
 <table>
   <thead>
     <tr>
-      <th>Number</th>
+      <th>Last four digits</th>
       <th>Exp date</th>
       <th>Name on card</th>
       <th>Organisation</th>
@@ -18,7 +18,7 @@
     <% @credit_cards.each do |credit_card| %>
     <% if current_user.id == credit_card.user_id %>
       <tr>
-        <td><%= credit_card.number %></td>
+        <td><%= credit_card.number[-4..-1] %></td>
         <td><%= credit_card.exp_date %></td>
         <td><%= credit_card.name_on_card %></td>
         <td><%= credit_card.organisation %></td>

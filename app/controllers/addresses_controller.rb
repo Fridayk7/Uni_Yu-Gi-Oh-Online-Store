@@ -1,16 +1,26 @@
 class AddressesController < ApplicationController
   before_action :set_address, only: [:show, :edit, :update, :destroy]
 
+
   # GET /addresses
   # GET /addresses.json
   def index
     @addresses = Address.all
+    if current_user.Admin_rights != true
+      @addresses = Address.where("user_id = ?", "#{current_user.id}")
+    end
     @user = User.all
   end
 
   # GET /addresses/1
   # GET /addresses/1.json
   def show
+    @address = params[:id]
+    @address = Address.find_by(id: @address)
+    unless session[:user_id] == @address.user_id
+      redirect_to "/pages/denied"
+      return
+    end
   end
 
   # GET /addresses/new

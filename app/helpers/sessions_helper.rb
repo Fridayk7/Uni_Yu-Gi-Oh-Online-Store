@@ -11,7 +11,7 @@ module SessionsHelper
 
  def admin?
     @current_user ||= User.find_by(id:session[:user_id])
-    if @current_user.email == "admin@amdin.com"
+    if @current_user.Admin_rights == true
       return true
     else
       redirect_to "/pages/denied"

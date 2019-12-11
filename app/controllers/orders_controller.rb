@@ -1,15 +1,23 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
-
   # GET /orders
   # GET /orders.json
   def index
     @orders = Order.all
+    if current_user.Admin_rights != true
+      @orders = Order.where("user_id = ?","#{current_user.id}")
+    end
   end
 
   # GET /orders/1
   # GET /orders/1.json
   def show
+    @order = params[:id]
+    @order = Order.find_by(id: @order)
+    unless session[:user_id] == @order.user_id
+      redirect_to "/pages/denied"
+      return
+    end
   end
 
   # GET /orders/new
