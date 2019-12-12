@@ -18,7 +18,7 @@ class CreditCardsController < ApplicationController
   def show
     @card = params[:id]
     @card = CreditCard.find_by(id: @card)
-    unless session[:user_id] == @card.user_id
+    unless session[:user_id] == @card.user_id || current_user.Admin_rights == true
       redirect_to "/pages/denied"
       return
     end

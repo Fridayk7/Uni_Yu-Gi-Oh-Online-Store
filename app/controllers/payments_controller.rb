@@ -27,7 +27,7 @@ class PaymentsController < ApplicationController
   def show
     @payment = params[:id]
     @payment = Payment.find_by(id: @payment)
-    unless session[:user_id] == @payment.user_id
+    unless session[:user_id] == @payment.user_id || current_user.Admin_rights == true
       redirect_to "/pages/denied"
       return
     end

@@ -4,10 +4,9 @@ one:
   amount: 9.99
   credit_card: one
   user: one
-  order: one
+
 
 two:
   amount: 9.99
   credit_card: two
   user: two
-  order: two

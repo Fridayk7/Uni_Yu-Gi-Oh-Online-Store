@@ -22,7 +22,7 @@ class OrdersController < ApplicationController
   def show
     @order = params[:id]
     @order = Order.find_by(id: @order)
-    unless session[:user_id] == @order.user_id
+    unless session[:user_id] == @order.user_id || current_user.Admin_rights == true
       redirect_to "/pages/denied"
       return
     end

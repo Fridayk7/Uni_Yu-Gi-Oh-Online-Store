@@ -1,5 +1,10 @@
 <p id="notice"><%= notice %></p>
-
+<div class="container">
+  <div class="row">
+    <div class="col-md-">
+        <img class="card-img-top" src="http://yugiohprices.com/api/card_image/<%= @stock.card.name %>" alt="Card image cap" width = 200 height="400">
+    </div>
+    <div class="col">
 <p>
   <strong>Card:</strong>
   <%= @stock.card.name %>
@@ -26,6 +31,8 @@
 </p>
 <p><%= link_to 'Order Now',new_order_path(:stock_id => @stock) %><p>
 <p><%= link_to 'See card information' ,"/cards/#{@stock.card.id}" %><p>
-
+</div>
+</div>
+</div>
 <%= link_to 'Edit', edit_stock_path(@stock) %> |
 <%= link_to 'Back', stocks_path %>
