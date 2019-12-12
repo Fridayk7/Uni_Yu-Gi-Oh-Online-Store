@@ -9,6 +9,9 @@ namespace :order do
      stock = Stock.order("RANDOM()").first
      n = stock.quantity.to_i
      quantity = rand(1..n)
+     while quantity > stock.quantity.to_i do
+       quantity = rand(1..n)
+     end
      stock.quantity = stock.quantity.to_i - quantity.to_i
      stock.save
           Order.create!(

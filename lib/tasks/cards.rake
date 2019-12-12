@@ -37,17 +37,18 @@ namespace :cards do
 
 
   task seed_stock: :environment do
+    Order.destroy_all
 Stock.destroy_all
     CSV.foreach("lib/assets/backupStocks.csv", :headers =>true) do |row |
       puts row.inspect #just so that we know the file's being read
       card = Card.where(name: row[0])
-      if row[3].to_i != 0 && card != []
+      if row[3].to_i >= 1 && card != []
         Stock.create!(
         card: Card.find_by(name: row[0]),
         yugioh_set: YugiohSet.find_by(name: row[1]),
         print_tag: row[2],
         price: row[3],
-        quantity: rand(100),
+        quantity: rand(1..100),
         )
       end
   end
