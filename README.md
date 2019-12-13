@@ -44,8 +44,8 @@ Admin Password: 8786843869 (random generated when seeding)
 
 ## Testing
 
-To run Capybara test use bundle exec rspec
-To run Cucumber tests use bundle exec rspec
+1.To run Capybara test use bundle exec rspec
+2.To run Cucumber tests use bundle exec cucumber
 
 #### Issue #1
 
@@ -72,3 +72,6 @@ https://en.wikipedia.org/wiki/Yu-Gi-Oh!_Trading_Card_Game
 
 Live API Data:
 https://yugiohprices.docs.apiary.io/#
+
+Live website:
+https://glacial-taiga-95259.herokuapp.com 
