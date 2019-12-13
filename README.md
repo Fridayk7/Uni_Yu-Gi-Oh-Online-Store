@@ -42,7 +42,10 @@ Available on heroku at:
 Admin Email: admin@admin.com
 Admin Password: 8786843869 (random generated when seeding)
 
-## Known Issues
+## Testing
+
+To run Capybara test use bundle exec rspec
+To run Cucumber tests use bundle exec rspec
 
 #### Issue #1
 
