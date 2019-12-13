@@ -36,6 +36,14 @@ class StocksController < ApplicationController
 
   # GET /stocks/1/edit
   def edit
+    @cards = []
+    @card = Card.find_by("id = ?", @stock.card)
+    @cards.push(@card)
+    @cards.push(@card)
+    @yugioh_sets = []
+    @yugioh_set = YugiohSet.find_by("id = ?", @stock.yugioh_set)
+    @yugioh_sets.push(@yugioh_set)
+    @yugioh_sets.push(@yugioh_set)
   end
 
   # POST /stocks

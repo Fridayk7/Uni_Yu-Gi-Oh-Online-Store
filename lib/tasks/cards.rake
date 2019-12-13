@@ -48,7 +48,7 @@ Stock.destroy_all
         yugioh_set: YugiohSet.find_by(name: row[1]),
         print_tag: row[2],
         price: row[3],
-        quantity: rand(1..100),
+        quantity: rand(20..100),
         )
       end
   end

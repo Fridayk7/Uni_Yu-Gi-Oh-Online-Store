@@ -7,6 +7,10 @@ namespace :order do
    @users.each do |user|
      rand(1..10).times do |index|
      stock = Stock.order("RANDOM()").first
+     if stock.quantity = 0
+       stock.quantity = rand(20...100)
+       stock.save
+     end
      n = stock.quantity.to_i
      quantity = rand(1..n)
      while quantity > stock.quantity.to_i do

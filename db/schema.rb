@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 2019_12_12_033713) do
     t.integer "card_id"
     t.integer "yugioh_set_id"
     t.string "print_tag"
-    t.float "price"
+    t.decimal "price", precision: 8, scale: 2
     t.string "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

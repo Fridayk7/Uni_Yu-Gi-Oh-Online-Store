@@ -27,7 +27,6 @@ Payment.destroy_all
         end
         stock.purchases += order.quantity.to_i
         stock.save
-        puts payment.pay_day.to_s
         end
       end
       puts user.name + "done"

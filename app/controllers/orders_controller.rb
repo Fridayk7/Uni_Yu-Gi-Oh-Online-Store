@@ -37,9 +37,7 @@ class OrdersController < ApplicationController
 
   # GET /orders/1/edit
   def edit
-    puts @order.to_s + "hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
     @stock = Stock.find_by("id = ?", @order.stock)
-    puts "hereeeeeeeeeeeeeeeeeeee" + @stock.to_s
   end
 
   # POST /orders
